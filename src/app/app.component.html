@@ -1,0 +1,50 @@
+<div
+  class="d-flex justify-content-center align-items-center"
+  style="height: 100vh"
+>
+  <div class="card" style="width: 70%">
+    <div class="card-header">
+      <h1 class="text-center">Validation du numéro de sécurité sociale</h1>
+    </div>
+    <div class="card-body">
+      <div
+        *ngIf="hasPatternError || hasValidityError"
+        data-cy-global-status
+        class="alert alert-danger"
+      >
+        Le patient ne peut pas être pris en charge !
+      </div>
+      <div
+        *ngIf="isSuccess && !(hasPatternError || hasValidityError)"
+        data-cy-global-status
+        class="alert alert-success"
+      >
+        Le patient est pris en charge !
+      </div>
+    </div>
+    <form [formGroup]="form">
+      <input
+        type="text"
+        formControlName="securityNumber"
+        class="form-control"
+        name="security-number"
+        data-cy-security-number
+      />
+      <p
+        class="invalid-feedbacK"
+        data-cy-security-number-error
+        *ngIf="hasPatternError || hasValidityError"
+      >
+        Numéro de sécurité sociale invalide !
+      </p>
+      <button
+        type="button"
+        class="btn btn-primary"
+        data-cy-submit
+        (click)="handleSubmit()"
+      >
+        Valider
+      </button>
+    </form>
+  </div>
+</div>
